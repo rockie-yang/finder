@@ -1,3 +1,5 @@
+package finder
+
 import java.io.File
 
 /**
@@ -7,8 +9,9 @@ import java.io.File
  * Time: 9:36 PM
  * To change this template use File | Settings | File Templates.
  */
-class TextGrep extends Grep {
+class TextGreper extends Greper {
   def grep(file: File, content: String) = {
+
     val lines = scala.io.Source.fromFile(file).getLines().toList
     lines.filter(line => line.trim().matches(content))
   }
