@@ -10,12 +10,15 @@ import akka.actor.ActorRef
  * Time: 9:36 PM
  * To change this template use File | Settings | File Templates.
  */
-class TextGreper(listener: ActorRef) extends Greper {
+class TextGreper(listener: ActorRef, matcher: Matcher) extends Greper {
+
+
   def grep(file: File, content: String) = {
 
     val lines = scala.io.Source.fromFile(file).getLines().toList
-    val matches = lines.filter(line => line.trim().matches(content))
+    val matches = lines.filter(line => matcher(line.trim(), content))
 
-    listener ! Result(file.getName, matches)
+    if (!matches.isEmpty)
+      listener ! Result(file.getAbsolutePath, matches)
   }
 }

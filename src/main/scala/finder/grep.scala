@@ -22,13 +22,21 @@ class Listener extends Actor{
 }
 object grep
 {
-   def apply(file: File, content: String, listener: ActorRef): Unit = {
+   def apply(file: File, content: String, listener: ActorRef, matcher: Matcher): Unit = {
      val fileName = file.getName
-     if (fileName.endsWith(".txt")) new TextGreper(listener).grep(file, content)
-     else new TextGreper(listener).grep(file, content)
+     val ext = fileName.split("\\.").last.toLowerCase
+
+     val greper = ext match {
+       case "txt" => new TextGreper(listener, matcher)
+       case "scala" => new TextGreper(listener, matcher)
+       case _ => new DummyGreper(listener)
+     }
+
+    greper.grep(file, content)
+
    }
 
-  def apply(path: String, content: String, listener: ActorRef): Unit = {
-    apply(new File(path), content, listener)
+  def apply(path: String, content: String, listener: ActorRef, matcher: Matcher): Unit = {
+    apply(new File(path), content, listener, matcher)
   }
 }

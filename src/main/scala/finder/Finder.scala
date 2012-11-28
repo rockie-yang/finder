@@ -10,16 +10,21 @@ import akka.actor.ActorRef
  * Time: 9:38 PM
  * To change this template use File | Settings | File Templates.
  */
-class Finder {
-  def find(path: File, content: String, listener: ActorRef): Unit = {
-    val files = path.listFiles()
+object Finder {
+  def find(path: File, content: String, listener: ActorRef, matcher: Matcher): Unit = {
+//    println("find in directory " + path.getAbsolutePath)
 
-    for (file <- files) {
-      if (file.isDirectory) find(file, content, listener)
-      else grep(file, content, listener)
-    }
+    val children = path.listFiles()
+
+    val (files, dirs) = children.partition(f => f.isFile)
+
+    files foreach (file => grep(file, content, listener, matcher))
+    dirs foreach (dir => find(dir, content, listener, matcher))
+
   }
-  def find(path: String, content: String, listener: ActorRef): Unit = {
-     find(new File(path), content, listener)
+
+
+  def find(path: String, content: String, listener: ActorRef, matcher: Matcher): Unit = {
+     find(new File(path), content, listener, matcher)
   }
 }
