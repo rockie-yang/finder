@@ -13,7 +13,7 @@ import org.apache.lucene.util.Version
  * Date: 12/2/12
  * Time: 9:35 PM
  */
-class TextIndexer(val indexPath: String) extends Indexer {
+class TextIndexer(val indexPath: String)  {
 
   val dir = FSDirectory.open(new File(indexPath))
   val analyzer = new StandardAnalyzer(Version.LUCENE_40)

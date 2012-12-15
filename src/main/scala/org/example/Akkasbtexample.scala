@@ -2,7 +2,6 @@ package main.scala.org.example
 
 import akka.actor._
 import akka.pattern.ask
-import akka.util.duration._
 import akka.util.Timeout
 
 case object Tick
@@ -26,11 +25,11 @@ object Akkasbtexample extends App {
   counter ! Tick
   counter ! Tick
 
-  implicit val timeout = Timeout(5 seconds)
+  implicit val timeout = Timeout(5)
 
-  (counter ? Get) onSuccess {
-    case count => println("Count is " + count)
-  }
+//  (counter ? Get) onSuccess {
+//    case count => println("Count is " + count)
+//  }
 
   system.shutdown()
 }
