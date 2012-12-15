@@ -35,11 +35,6 @@ object Indexer extends App{
 
   val ftype = tika.detect(file)
 
-  val f2 = new File("/Users/yangyoujiang/Dropbox/TeR_Service Catalog.doc")
-  println("content3 is : " + tika.parseToString(f2))
-  val ftype2 = tika.detect(f2)
-  println("file type2 is : " + ftype2)
-
   println("file type is : " + ftype)
 
   val content2 = tika.parseToString(file)
