@@ -1,12 +1,11 @@
 package finder
 
 /**
- * Created with IntelliJ IDEA.
- * User: yangyoujiang
- * Date: 12/13/12
- * Time: 8:41 PM
- * To change this template use File | Settings | File Templates.
+ * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
+ * Created at :  1/20/13
  */
-class FileInfo(val fullPath: String, val lastModified: Long, val title: String, val content: String, val tags: List[String] = Nil) {
+class FileInfo(val fullPath: String, val lastModified: Long,
+               val title: String, val content: String,
+               val tags: List[String] = Nil) {
 
 }

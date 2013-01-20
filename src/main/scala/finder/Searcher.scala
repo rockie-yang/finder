@@ -1,19 +1,16 @@
 package finder
 
-import java.io.{FileInputStream, InputStreamReader, File, BufferedReader}
-import org.apache.lucene.search.{Query, IndexSearcher}
-import org.apache.lucene.index.DirectoryReader
-import org.apache.lucene.store.FSDirectory
+import java.io.{File, BufferedReader}
 import org.apache.lucene.analysis.standard.StandardAnalyzer
-import org.apache.lucene.util.Version
+import org.apache.lucene.index.DirectoryReader
 import org.apache.lucene.queryparser.classic.QueryParser
+import org.apache.lucene.search.{Query, IndexSearcher}
+import org.apache.lucene.store.FSDirectory
+import org.apache.lucene.util.Version
 
 /**
- * Created with IntelliJ IDEA.
- * User: yangyoujiang
- * Date: 12/6/12
- * Time: 9:05 PM
- * To change this template use File | Settings | File Templates.
+ * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
+ * Created at :  1/20/13
  */
 class Searcher {
 

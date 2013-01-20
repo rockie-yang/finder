@@ -1,18 +1,15 @@
 package finder
 
-import java.io.File
 import akka.actor.ActorRef
+import java.io.File
 
 /**
- * Created with IntelliJ IDEA.
- * User: yangyoujiang
- * Date: 11/25/12
- * Time: 9:38 PM
- * To change this template use File | Settings | File Templates.
+ * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
+ * Created at :  1/20/13
  */
 object Finder {
   def find(path: File, content: String, listener: ActorRef, matcher: Matcher): Unit = {
-//    println("find in directory " + path.getAbsolutePath)
+    //    println("find in directory " + path.getAbsolutePath)
 
     val children = path.listFiles()
 
@@ -25,6 +22,6 @@ object Finder {
 
 
   def find(path: String, content: String, listener: ActorRef, matcher: Matcher): Unit = {
-     find(new File(path), content, listener, matcher)
+    find(new File(path), content, listener, matcher)
   }
 }

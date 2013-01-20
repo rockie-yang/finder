@@ -1,19 +1,18 @@
 package finder
 
-import org.apache.lucene.index.{IndexReader, IndexWriterConfig, Term, IndexWriter}
 import java.io.{InputStreamReader, BufferedReader, FileInputStream, File}
+import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.document._
 import org.apache.lucene.index.IndexWriterConfig.OpenMode
+import org.apache.lucene.index.{IndexWriterConfig, Term, IndexWriter}
 import org.apache.lucene.store.FSDirectory
-import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.util.Version
 
 /**
- * User: Rockie Yang
- * Date: 12/2/12
- * Time: 9:35 PM
+ * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
+ * Created at :  1/20/13
  */
-class TextIndexer(val indexPath: String)  {
+class TextIndexer(val indexPath: String) {
 
   val dir = FSDirectory.open(new File(indexPath))
   val analyzer = new StandardAnalyzer(Version.LUCENE_40)

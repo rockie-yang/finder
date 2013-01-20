@@ -1,15 +1,12 @@
 package finder
 
-import java.io.File
 import akka.actor.ActorRef
+import java.io.File
 
 /**
- * Created with IntelliJ IDEA.
- * User: yangyoujiang
- * Date: 11/28/12
- * Time: 3:59 PM
- * To change this template use File | Settings | File Templates.
+ * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
+ * Created at :  1/20/13
  */
-class DummyGreper(listener: ActorRef)  extends Greper{
+class DummyGreper(listener: ActorRef) extends Greper {
   def grep(file: File, content: String) {}
 }

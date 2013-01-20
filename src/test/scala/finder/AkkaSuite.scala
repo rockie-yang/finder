@@ -1,16 +1,14 @@
 package finder
 
-import org.scalatest.FunSuite
 import akka.actor.{Props, ActorSystem}
+import org.scalatest.FunSuite
+
 
 /**
- * Created with IntelliJ IDEA.
- * User: yangyoujiang
- * Date: 11/27/12
- * Time: 9:27 PM
- * To change this template use File | Settings | File Templates.
+ * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
+ * Created at :  1/20/13
  */
-class AkkaSuite extends FunSuite{
+class AkkaSuite extends FunSuite {
   protected val system = ActorSystem("finder")
   protected val listener = system.actorOf(Props[Listener])
 
