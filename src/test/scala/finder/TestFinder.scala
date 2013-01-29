@@ -14,7 +14,7 @@ class TestFinder extends AkkaSuite {
   test("finder single text") {
 
 
-    Finder.find(".", "text", listener, ContainMatcher)
+    Finder.find(".", listener, new ContainMatcher("text"))
 
     //    assert(matches === List("text"))
   }

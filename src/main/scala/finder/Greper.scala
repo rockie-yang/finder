@@ -8,15 +8,16 @@ package finder
  * To change this template use File | Settings | File Templates.
  */
 trait Matcher {
-  def apply(origin: String, find: String): Boolean
+  def apply(origin: String): Boolean
 }
 
-object ContainMatcher extends Matcher{
-  def apply(origin: String, find: String): Boolean =
-    origin.contains(find)
+class ContainMatcher(matchStr: String) extends Matcher {
+  def apply(content: String): Boolean =
+    content.contains(matchStr)
 }
+
 trait Greper {
 
 
-  def grep(file: java.io.File, content: String)
+  def grep(file: java.io.File)
 }

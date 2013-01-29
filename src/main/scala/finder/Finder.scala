@@ -8,20 +8,20 @@ import java.io.File
  * Created at :  1/20/13
  */
 object Finder {
-  def find(path: File, content: String, listener: ActorRef, matcher: Matcher): Unit = {
+  def find(path: File, listener: ActorRef, matcher: Matcher): Unit = {
     //    println("find in directory " + path.getAbsolutePath)
 
     val children = path.listFiles()
 
     val (files, dirs) = children.partition(f => f.isFile)
 
-    files foreach (file => grep(file, content, listener, matcher))
-    dirs foreach (dir => find(dir, content, listener, matcher))
+    files foreach (file => grep(file, listener, matcher))
+    dirs foreach (dir => find(dir, listener, matcher))
 
   }
 
 
-  def find(path: String, content: String, listener: ActorRef, matcher: Matcher): Unit = {
-    find(new File(path), content, listener, matcher)
+  def find(path: String, listener: ActorRef, matcher: Matcher): Unit = {
+    find(new File(path), listener, matcher)
   }
 }

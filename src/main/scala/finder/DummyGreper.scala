@@ -8,5 +8,5 @@ import java.io.File
  * Created at :  1/20/13
  */
 class DummyGreper(listener: ActorRef) extends Greper {
-  def grep(file: File, content: String) {}
+  def grep(file: File) {}
 }

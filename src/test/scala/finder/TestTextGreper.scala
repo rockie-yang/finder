@@ -17,7 +17,8 @@ class TestTextGreper extends AkkaSuite {
   test("grep single text") {
 
     val file = new File(this.getClass.getResource("SingleText.txt").getFile)
-    val matches = new TextGreper(listener, ContainMatcher).grep(file, "text");
+    val matcher = new ContainMatcher("text");
+    //    val matches = new TextGreper(listener, matcher).grep(file);
 
     //    assert(matches === List("text"))
   }
@@ -25,10 +26,10 @@ class TestTextGreper extends AkkaSuite {
   test("using factory") {
     println("test")
     val file = new File(this.getClass.getResource("SingleText.txt").getFile)
-    grep(file, "text", listener, ContainMatcher)
+    grep(file, listener, new ContainMatcher("text"))
     //    assert(matches === List("text"))
 
-    grep(file, "notext", listener, ContainMatcher)
+    grep(file, listener, new ContainMatcher("notext"))
     //    assert(nomatch === List())
   }
 }

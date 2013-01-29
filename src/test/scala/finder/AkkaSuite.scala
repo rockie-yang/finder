@@ -10,6 +10,6 @@ import org.scalatest.FunSuite
  */
 class AkkaSuite extends FunSuite {
   protected val system = ActorSystem("finder")
-  protected val listener = system.actorOf(Props[Listener])
+  protected val listener = system.actorOf(Props[finder.PrintOutListener])
 
 }

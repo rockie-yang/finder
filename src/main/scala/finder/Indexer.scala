@@ -16,9 +16,9 @@ import org.xml.sax.helpers.DefaultHandler
  * Created at :  1/20/13
  */
 object Indexer extends App {
-  val DEBUG: Boolean = false;
+  val DEBUG: Boolean = false
   //1
-  val textualMetadataFields = Set(Metadata.TITLE, Metadata.DESCRIPTION, Metadata.SUBJECT);
+  val textualMetadataFields = Set(Metadata.TITLE, Metadata.DESCRIPTION, Metadata.SUBJECT)
   //2
 
   val config = TikaConfig.getDefaultConfig
@@ -27,6 +27,7 @@ object Indexer extends App {
 
 
   val file = new File(".project")
+
   val metadata = new Metadata()
 
   val stream = new FileInputStream(file);
