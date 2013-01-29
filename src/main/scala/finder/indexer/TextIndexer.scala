@@ -1,4 +1,4 @@
-package finder
+package finder.indexer
 
 import java.io.{InputStreamReader, BufferedReader, FileInputStream, File}
 import org.apache.lucene.analysis.standard.StandardAnalyzer

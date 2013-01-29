@@ -1,4 +1,4 @@
-package finder
+package finder.common
 
 /**
  * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)

@@ -1,4 +1,4 @@
-package finder
+package finder.common
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,17 +7,12 @@ package finder
  * Time: 9:35 PM
  * To change this template use File | Settings | File Templates.
  */
-trait Matcher {
+trait StringMatcher {
   def apply(origin: String): Boolean
 }
 
-class ContainMatcher(matchStr: String) extends Matcher {
+
+class ContainStringMatcher(matchStr: String) extends StringMatcher {
   def apply(content: String): Boolean =
     content.contains(matchStr)
-}
-
-trait Greper {
-
-
-  def grep(file: java.io.File)
 }

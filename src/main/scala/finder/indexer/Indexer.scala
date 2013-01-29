@@ -1,4 +1,4 @@
-package finder
+package finder.indexer
 
 import java.io.{FileInputStream, File}
 import org.apache.lucene.document.Field.Store

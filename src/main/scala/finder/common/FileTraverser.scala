@@ -1,4 +1,4 @@
-package finder
+package finder.common
 
 import java.io.File
 
@@ -8,7 +8,7 @@ import java.io.File
  * Created by : Rockie Yang(eyouyan@gmail.com, snowriver.org)
  * Created at : 1/26/13
  */
-class FileTraverser(filePred: File => Boolean, processor: Processor, depth: Int = Int.MaxValue) {
+class FileTraverser(filePred: File => Boolean, processor: FileProcessor, depth: Int = Int.MaxValue) {
 
   def traverse(path: File, level: Int): Unit = {
 

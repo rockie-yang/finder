@@ -1,5 +1,6 @@
-package finder
+package finder.searcher
 
+import finder.common.Config
 import java.io.{File, BufferedReader}
 import org.apache.lucene.analysis.standard.StandardAnalyzer
 import org.apache.lucene.index.DirectoryReader

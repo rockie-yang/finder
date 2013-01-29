@@ -1,7 +1,7 @@
-package finder
+package finder.grep
 
-import akka.actor.ActorRef
 import collection.Iterator
+import finder.common.{StringMatcher, FileProcessor}
 import java.io.File
 
 /**
@@ -14,7 +14,7 @@ import java.io.File
  * Created at :  1/20/13
  */
 
-class TextGreper(listener: ActorRef, matcher: Matcher, grepLines: Int = Int.MaxValue) extends Processor {
+class TextGreper(listener: ResultListener, matcher: StringMatcher, grepLines: Int = Int.MaxValue) extends FileProcessor {
 
 
   def apply(file: File) {
@@ -26,7 +26,7 @@ class TextGreper(listener: ActorRef, matcher: Matcher, grepLines: Int = Int.MaxV
         else filter(lines, (line: String) => matcher(line.trim()), grepLines)
 
       if (!matches.isEmpty)
-        listener ! Result(file.getAbsolutePath, matches)
+        listener(Result(file, matches))
     }
     catch {
       case ex: Exception => println(ex.toString)

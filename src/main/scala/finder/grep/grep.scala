@@ -1,6 +1,6 @@
-package finder
+package finder.grep
 
-import akka.actor.{Props, ActorSystem, ActorRef}
+import finder.common.{ContainStringMatcher, FileTraverser}
 import java.io.File
 import scala.Predef._
 
@@ -62,10 +62,9 @@ object grep {
     val pattern = options("pattern").toString
     val path = options("path").toString
 
-    val system = ActorSystem("finder")
-    val listener = system.actorOf(Props[finder.PrintOutListener])
+    val listener = new ResultPrintOutListener
 
-    val matcher = new ContainMatcher(pattern)
+    val matcher = new ContainStringMatcher(pattern)
 
     val filePredicate = (file: File) => file.getName.matches(filePattern)
     val textGreper = new TextGreper(listener, matcher, searchLines)
@@ -73,23 +72,5 @@ object grep {
 
     traverser.traverse(path)
 
-  }
-
-  def apply(file: File, listener: ActorRef, matcher: Matcher): Unit = {
-    val fileName = file.getName
-    val ext = fileName.split("\\.").last.toLowerCase
-
-    val greper = ext match {
-      case "txt" => new TextGreper(listener, matcher)
-      case "scala" => new TextGreper(listener, matcher)
-      case _ => new DummyGreper(listener)
-    }
-
-    //    greper.grep(file)
-
-  }
-
-  def apply(path: String, listener: ActorRef, matcher: Matcher): Unit = {
-    apply(new File(path), listener, matcher)
   }
 }

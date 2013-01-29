@@ -1,11 +1,11 @@
-package finder
+package finder.indexer
 
 import java.io.{FileInputStream, File}
+import org.apache.lucene.document.Field.Store
+import org.apache.lucene.document.{LongField, StringField, TextField, Document}
 import org.apache.tika.metadata.Metadata
 import org.apache.tika.parser.{ParseContext, AutoDetectParser}
 import org.apache.tika.sax.BodyContentHandler
-import org.apache.lucene.document.{LongField, StringField, TextField, Document}
-import org.apache.lucene.document.Field.Store
 
 /**
  * It is a class create Lucene Document for a file. The content is parsed by Tika
