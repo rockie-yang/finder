@@ -35,6 +35,8 @@ object grep {
       }
     }
 
+
+    // this is just a test for grep
     val default = Map(
       "path" -> "/Users/yangyoujiang/scala/finder/src/",
       "pattern" -> "pattern",
