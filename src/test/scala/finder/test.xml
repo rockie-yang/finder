@@ -1,0 +1,27 @@
+<!--<SetSubscription xmlns="..">-->
+<!--<Gprs msisdn="1231">-->
+<!--<msisdn>1231</msisdn>-->
+<!--</Gprs>-->
+<!--<Gprs msisdn="1232">-->
+<!--<max>100</max>-->
+<!--</Gprs>-->
+<!--<Gprs msisdn="1233" xml:nil="true"></Gprs>-->
+<!--</SetSubscription>-->
+<SetSubscription xmlns="..">
+    <CreateGprs msisdn="1231">
+    </Gprs>
+    <SetGprs msisdn="1232">
+        <max>100</max>
+    </Gprs>
+    <DeleteGprs msisdn="1233"></Gprs>
+</Subscription>
+
+
+<Subscription xmlns=".." operation="set">
+    <Gprs msisdn="1231" operation="create">
+    </Gprs>
+    <Gprs msisdn="1232" operation="set">
+        <max>100</max>
+    </Gprs>
+    <Gprs msisdn="1233" operation="delete"></Gprs>
+</Subscription>
