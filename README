@@ -1,1 +1,11 @@
-This file was created by IntelliJ IDEA 11.1.4 for binding GitHub repository
+Finder is my hobby project. Two main purpurses
+* Windows search function really sucks
+* Play with Scala
+
+
+package, one zip file will be generated like finder-0.1.zip
+    mvn clean appassembler:assemble package -DskipTests
+
+execute
+    bin/grep
+

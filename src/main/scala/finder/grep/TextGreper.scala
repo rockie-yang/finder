@@ -3,6 +3,7 @@ package finder.grep
 import collection.Iterator
 import finder.common.{StringMatcher, FileProcessor}
 import java.io.File
+import javax.activation.MimetypesFileTypeMap
 
 /**
  * Grep a text file by the @matcher, send the result to the @listener
@@ -15,21 +16,21 @@ import java.io.File
  */
 
 class TextGreper(listener: ResultListener, matcher: StringMatcher, grepLines: Int = Int.MaxValue) extends FileProcessor {
-
-
   def apply(file: File) {
-    try {
-      val lines = scala.io.Source.fromFile(file).getLines()
+    if (FileTypeDetector.isTextFile(file)) {
+      try {
+        val lines = scala.io.Source.fromFile(file).getLines()
 
-      val matches =
-        if (grepLines == Int.MaxValue) lines.toList.filter(x => matcher(x))
-        else filter(lines, (line: String) => matcher(line.trim()), grepLines)
+        val matches =
+          if (grepLines == Int.MaxValue) lines.toList.filter(x => matcher(x))
+          else filter(lines, (line: String) => matcher(line.trim()), grepLines)
 
-      if (!matches.isEmpty)
-        listener(Result(file, matches))
-    }
-    catch {
-      case ex: Exception => println(ex.toString)
+        if (!matches.isEmpty)
+          listener(Result(file, matches))
+      }
+      catch {
+        case ex: Exception => println(ex.toString)
+      }
     }
   }
 
