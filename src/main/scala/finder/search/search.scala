@@ -1,13 +1,13 @@
-package finder.grep
+package finder.search
 
 import finder.common.{ContainStringMatcher, FileTraverser}
 import java.io.File
 import scala.Predef._
 
 
-object grep {
+object search {
   val usage = """
-                |Usage: grep [-p filePattern] [-d searchDepth] [-l searchLines] pattern path
+                |Usage: search [-p filePattern] [-d searchDepth] [-l searchLines] pattern path
                 |   if don't specify -p the filePattern, then try to search all files
                 |   if don't specify -d the searchDepth, then search all sub folders
                 |   if don't specify -f the searchLine, then search all lines
@@ -36,7 +36,7 @@ object grep {
     }
 
 
-    // this is just a test for grep
+    // this is just a test for search
     val default = Map(
       "path" -> "/Users/yangyoujiang/scala/finder/src/",
       "pattern" -> "pattern",
@@ -48,7 +48,7 @@ object grep {
 
     if (options.contains("pattern") && options.contains("path")) {
       grep(options)
-      println("grep finished")
+      println("search finished")
     }
     else println(options)
     //    }

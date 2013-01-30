@@ -198,8 +198,8 @@
                     <programs>
                         <!-- multiple program can be defined -->
                         <program>
-                            <mainClass>finder.grep.grep</mainClass>
-                            <name>grep</name>
+                            <mainClass>finder.search.search</mainClass>
+                            <name>search</name>
                         </program>
                     </programs>
                 </configuration>

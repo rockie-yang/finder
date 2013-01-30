@@ -1,4 +1,4 @@
-package finder.grep
+package finder.search
 
 import finder.common.ContainStringMatcher
 import java.io.File

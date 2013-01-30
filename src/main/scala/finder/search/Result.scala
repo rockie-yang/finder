@@ -1,4 +1,4 @@
-package finder.grep
+package finder.search
 
 import java.io.File
 
@@ -7,7 +7,7 @@ import java.io.File
  * Created at : 1/28/13
  */
 case class Result(file: File, matches: List[String]) {
-  //  override def toString = fileName + " : " + matches.mkString("\n")
+    override def toString = file.getAbsolutePath + "\n    " + matches.mkString("\n    ")
 }
 
 trait ResultListener {

@@ -1,4 +1,4 @@
-package finder.grep
+package finder.search
 
 import collection.Iterator
 import finder.common.{StringMatcher, FileProcessor}
@@ -9,7 +9,7 @@ import javax.activation.MimetypesFileTypeMap
  * Grep a text file by the @matcher, send the result to the @listener
  *
  * In order to avoid get all file data to memory for large files, can specify the @grepLines
- * By default, it will grep all lines in the file
+ * By default, it will search all lines in the file
  *
  * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
  * Created at :  1/20/13

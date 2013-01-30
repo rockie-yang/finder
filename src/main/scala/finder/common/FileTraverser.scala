@@ -19,7 +19,7 @@ class FileTraverser(filePred: File => Boolean, processor: FileProcessor, depth: 
         if (filePred(path)) processor(path)
       }
       else {
-        println("traverse directory " + path.getAbsolutePath)
+//        println("traverse directory " + path.getAbsolutePath)
         val children = path.listFiles()
 
         // search files in the directory first, then search the sub directory
