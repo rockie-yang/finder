@@ -12,7 +12,7 @@
             <fileMode>755</fileMode>
         </fileSet>
         <fileSet>
-            <directory>target/</directory>
+            <directory>target</directory>
             <outputDirectory>repo</outputDirectory>
             <includes>
                 <include>finder*.jar</include>

@@ -1,85 +1,77 @@
 package finder.indexer
 
-import java.io.{FileInputStream, File}
-import org.apache.lucene.document.Field.Store
-import org.apache.lucene.document.{StringField, TextField, Document}
-import org.apache.tika.Tika
-import org.apache.tika.config.TikaConfig
-import org.apache.tika.metadata.Metadata
-import org.apache.tika.parser.{ParseContext, AutoDetectParser}
-import org.apache.tika.sax.BodyContentHandler
-import org.xml.sax.helpers.DefaultHandler
-
+import java.io.File
+import finder.common.{SleepProcessor, FileProcessors, FileTraverser}
 
 /**
- * Created by :  Rockie Yang (eyouyan@gmail.com, snowriver.org)
- * Created at :  1/20/13
+ * Created by : Rockie Yang(eyouyan@gmail.com, snowriver.org)
+ * Created at : 1/31/13
  */
-object Indexer extends App {
-  val DEBUG: Boolean = false
-  //1
-  val textualMetadataFields = Set(Metadata.TITLE, Metadata.DESCRIPTION, Metadata.SUBJECT)
-  //2
-
-  val config = TikaConfig.getDefaultConfig
-
-  val tika = new Tika(config)
+object Indexer {
 
 
-  val file = new File(".project")
+  def main(args: Array[String])  {
+    // Index should be in low priority to get better user responsiveness
 
-  val metadata = new Metadata()
+    Thread.currentThread().setPriority(Thread.MIN_PRIORITY)
+    val options = parseArgs(args)
+    work(options)
+  }
 
-  val stream = new FileInputStream(file);
-  val content = tika.parseToString(stream, metadata).trim
+  def work(options: Map[String, Any]) {
+    val indexPath = new File(options("indexPath").toString)
+    indexPath.mkdirs()
 
-  val ftype = tika.detect(file)
+    val searchDepth = options("indexDepth").toString.toInt
+    val fileIndexer = new FileIndexer(indexPath.getAbsolutePath)
+    // for each file index, just sleep 1 milli second, to give a way cpu control
+    val processors = new FileProcessors(fileIndexer, new SleepProcessor)
+    val filePredicate = (file: File) => true
+    val path = options("path").toString
 
-  println("file type is : " + ftype)
+    val traverser = new FileTraverser(filePredicate, processors, searchDepth)
 
-  val content2 = tika.parseToString(file)
-  println("metadata: " + metadata.toString)
-  println("content : " + content)
-  println("content2: " + content2)
+    traverser.traverse(path)
+  }
 
-  val parser = tika.getParser
-  val handler = new DefaultHandler
-  parser.parse(
-    new FileInputStream(file), handler, metadata, new ParseContext)
+  def parseArgs(args: Array[String]) :  Map[String, Any] = {
+    val usage = """
+                  |Usage: indexer [-i indexPath] [-d indexDepth] path
+                  |   if don't specify -i the indexPath, then use HOME/.index to store indexes
+                  |   if don't specify -d the searchDepth, then search all sub folders
+                """.stripMargin
 
 
-  if (file.exists()) println("parse the file" + file.getAbsolutePath)
-  val i = index(file)
+    if (args.length <= 2) println(usage)
+    //    else {
+    val argList = args.toList
 
-  def index(file: File): Boolean = {
-    val metadata = new Metadata()
-    //    metadata.set(Metadata.IDENTIFIER, file.getAbsolutePath);   // 4
-    // If you know content type (eg because this document
-    // was loaded from an HTTP server), then you should also
-    // set Metadata.CONTENT_TYPE
-    // If you know content encoding (eg because this
-    // document was loaded from an HTTP server), then you
-    // should also set Metadata.CONTENT_ENCODING
-
-    val is = new FileInputStream(file) // 5
-    val parser = new AutoDetectParser() // 6
-    val handler = new BodyContentHandler() // 7
-    val context = new ParseContext
-
-    //    context.set(parser., parser);
-    try {
-      parser.parse(is, handler, metadata, new ParseContext)
-      println(handler.toString)
-    } finally {
-      is.close()
+    def nextOption(map: Map[String, Any], list: List[String]): Map[String, Any] = {
+      def isSwitch(s: String) = (s(0) == '-')
+      list match {
+        case Nil => map
+        case "-i" :: indexPath :: tail =>
+          nextOption(map ++ Map("indexPath" -> indexPath), tail)
+        case "-d" :: indexDepth :: tail =>
+          nextOption(map ++ Map("indexDepth" -> indexDepth), tail)
+        case path :: Nil =>
+          nextOption(map ++ Map("path" -> path), list.tail)
+        case option :: tail => println("Unknown option " + option)
+        exit(1)
+      }
     }
-    val doc = new Document
 
+    val userHome = System.getProperty( "user.home" )
+    // this is just a test for search
+    val default = Map(
+      "path" -> userHome,
+      "indexPath" -> (userHome + "/.index"),
+      "indexDepth" -> 2
+    )
+    val options = nextOption(default, argList)
 
-    doc.add(new TextField("contents", handler.toString, Store.NO))
-    doc.add(new StringField("fileName", file.getAbsolutePath, Store.YES))
+    println(userHome)
 
-    println(metadata.names.mkString(","))
-    true
+    options
   }
 }

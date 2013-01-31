@@ -13,6 +13,12 @@ trait FileProcessor {
   def apply(file: File)
 }
 
+class SleepProcessor(sleepMillSecond: Int = 1) extends FileProcessor {
+  def apply(file: File) {
+    Thread.sleep(sleepMillSecond)
+  }
+}
+
 class FileProcessors(processors: FileProcessor*) extends FileProcessor {
   def apply(file: File) {
     processors.foreach(processor => processor(file))
