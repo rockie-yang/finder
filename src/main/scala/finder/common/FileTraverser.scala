@@ -8,7 +8,7 @@ import java.io.File
  * Created by : Rockie Yang(eyouyan@gmail.com, snowriver.org)
  * Created at : 1/26/13
  */
-class FileTraverser(filePred: File => Boolean, processor: FileProcessor, depth: Int = Int.MaxValue) {
+class FileTraverser(filePred: File => Boolean, processor: FileProcessor, depth: Int = Int.MaxValue, verbose: Boolean = false) {
 
   def traverse(path: File, level: Int): Unit = {
 
@@ -19,14 +19,17 @@ class FileTraverser(filePred: File => Boolean, processor: FileProcessor, depth: 
         if (filePred(path)) processor(path)
       }
       else {
-//        println("traverse directory " + path.getAbsolutePath)
+        if (verbose)
+          println("traverse directory " + path.getAbsolutePath)
         val children = path.listFiles()
 
-        // search files in the directory first, then search the sub directory
-        val (files, dirs) = children.partition(f => f.isFile)
+        if (children != null) {
+          // search files in the directory first, then search the sub directory
+          val (files, dirs) = children.partition(f => f.isFile)
 
-        files foreach (file => traverse(file, level + 1))
-        dirs foreach (dir => traverse(dir, level + 1))
+          files foreach (file => traverse(file, level + 1))
+          dirs foreach (dir => traverse(dir, level + 1))
+        }
       }
     }
 

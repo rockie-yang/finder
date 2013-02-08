@@ -1,8 +1,8 @@
 package example
 
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
 import org.scalatest.FunSuite
+import org.scalatest.junit.JUnitRunner
 
 
 /**
@@ -13,7 +13,7 @@ import org.scalatest.FunSuite
  * To change this template use File | Settings | File Templates.
  */
 @RunWith(classOf[JUnitRunner])
-class TestLucene extends FunSuite{
+class TestLucene extends FunSuite {
   test("simple lucene test") {
 
   }

@@ -18,18 +18,17 @@ package example
  */
 
 import java.io.{InputStreamReader, FileInputStream, File, BufferedReader}
-import org.apache.lucene.store.FSDirectory
-import org.apache.lucene.index.{IndexReader, DirectoryReader}
-import org.apache.lucene.analysis.Analyzer
-import org.apache.lucene.analysis.standard.StandardAnalyzer
-import org.apache.lucene.util.Version
-import org.apache.lucene.queryparser.classic.QueryParser
 import java.util.Date
+import org.apache.lucene.analysis.standard.StandardAnalyzer
+import org.apache.lucene.index.DirectoryReader
+import org.apache.lucene.queryparser.classic.QueryParser
+import org.apache.lucene.search.IndexSearcher
+import org.apache.lucene.search.Query
+import org.apache.lucene.store.FSDirectory
+import org.apache.lucene.util.Version
 
 //import org.apache.lucene.queryparser.classic.QueryParser
 
-import org.apache.lucene.search.IndexSearcher
-import org.apache.lucene.search.Query
 
 /** Simple command-line based search demo. */
 object SearchFiles {

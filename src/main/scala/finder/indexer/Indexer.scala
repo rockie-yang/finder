@@ -1,7 +1,7 @@
 package finder.indexer
 
-import java.io.File
 import finder.common.{SleepProcessor, FileProcessors, FileTraverser}
+import java.io.File
 
 /**
  * Created by : Rockie Yang(eyouyan@gmail.com, snowriver.org)
@@ -10,7 +10,7 @@ import finder.common.{SleepProcessor, FileProcessors, FileTraverser}
 object Indexer {
 
 
-  def main(args: Array[String])  {
+  def main(args: Array[String]) {
     // Index should be in low priority to get better user responsiveness
 
     Thread.currentThread().setPriority(Thread.MIN_PRIORITY)
@@ -34,7 +34,7 @@ object Indexer {
     traverser.traverse(path)
   }
 
-  def parseArgs(args: Array[String]) :  Map[String, Any] = {
+  def parseArgs(args: Array[String]): Map[String, Any] = {
     val usage = """
                   |Usage: indexer [-i indexPath] [-d indexDepth] path
                   |   if don't specify -i the indexPath, then use HOME/.index to store indexes
@@ -61,7 +61,7 @@ object Indexer {
       }
     }
 
-    val userHome = System.getProperty( "user.home" )
+    val userHome = System.getProperty("user.home")
     // this is just a test for search
     val default = Map(
       "path" -> userHome,

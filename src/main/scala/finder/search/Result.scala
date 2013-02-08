@@ -7,25 +7,19 @@ import java.io.File
  * Created at : 1/28/13
  */
 case class Result(file: File, matches: List[String]) {
-    override def toString = file.getAbsolutePath + "\n    " + matches.mkString("\n    ")
+  override def toString = file.getAbsolutePath + "\n    " + matches.mkString("\n    ")
 }
 
 trait ResultListener {
   def apply(result: Result)
 }
 
-class ResultPrintOutListener extends ResultListener {
+class ResultPrintOutListener(holdResult: Boolean = false) extends ResultListener {
+  var results = List[Result]()
+
   def apply(result: Result) {
+    if (holdResult) results = result :: results
     println(result.toString)
   }
 }
 
-class ResultHolderListener extends ResultListener {
-
-  var results = List[Result]()
-
-  def apply(result: Result) {
-    results = result :: results
-  }
-
-}

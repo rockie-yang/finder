@@ -1,9 +1,8 @@
 package finder.search
 
 import collection.Iterator
-import finder.common.{StringMatcher, FileProcessor}
+import finder.common.{StringPredicate, FileProcessor}
 import java.io.File
-import javax.activation.MimetypesFileTypeMap
 
 /**
  * Grep a text file by the @matcher, send the result to the @listener
@@ -15,7 +14,7 @@ import javax.activation.MimetypesFileTypeMap
  * Created at :  1/20/13
  */
 
-class TextGreper(listener: ResultListener, matcher: StringMatcher, grepLines: Int = Int.MaxValue) extends FileProcessor {
+class TextGreper(listener: ResultListener, matcher: StringPredicate, grepLines: Int = Int.MaxValue) extends FileProcessor {
   def apply(file: File) {
     if (FileTypeDetector.isTextFile(file)) {
       try {

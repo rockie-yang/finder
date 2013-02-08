@@ -1,7 +1,7 @@
 package finder.search
 
-import javax.activation.MimetypesFileTypeMap
 import java.io.File
+import javax.activation.MimetypesFileTypeMap
 
 /**
  *
@@ -22,10 +22,10 @@ object FileTypeDetector {
   private val mimeTypesMap = new MimetypesFileTypeMap()
 
   private val textMimes = List("text", "xml", "html", "jsom")
-  private val textExt = List("txt", "c", "cpp", "scala")
+  private val textExt = List("txt", "c", "cpp", "scala", "log")
 
   def isTextFile(file: File): Boolean = {
-//    println("detecting " + file.getName)
+    //    println("detecting " + file.getName)
     val mimeType = mimeTypesMap.getContentType(file).toLowerCase
     val ext = file.getName.split("\\.").last
 

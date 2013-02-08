@@ -1,6 +1,6 @@
 package finder.search
 
-import finder.common.ContainStringMatcher
+import finder.common.{StringUnMatcher, StringMatcher}
 import java.io.File
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
@@ -19,13 +19,13 @@ class TestTextGreper extends FunSuite {
 
     val file = new File(this.getClass.getResource("SingleText.txt").getFile)
 
-    val existListener = new ResultHolderListener
-    new TextGreper(existListener, new ContainStringMatcher("text"))(file)
+    val existListener = new ResultPrintOutListener(holdResult = true)
+    new TextGreper(existListener, StringMatcher("contains", ignoreCase = true, List("text")))(file)
     println(existListener)
     assert(existListener.results === List(Result(file, List("text"))))
 
-    val noneExistListener = new ResultHolderListener
-    new TextGreper(noneExistListener, new ContainStringMatcher("notext"))(file)
+    val noneExistListener = new ResultPrintOutListener(holdResult = true)
+    new TextGreper(noneExistListener, StringUnMatcher("contains", ignoreCase = true, List("text")))(file)
     assert(noneExistListener.results === List[Result]())
   }
 }
